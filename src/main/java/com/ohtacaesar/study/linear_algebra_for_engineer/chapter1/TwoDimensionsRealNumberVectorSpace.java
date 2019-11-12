@@ -15,6 +15,8 @@ public class TwoDimensionsRealNumberVectorSpace {
   @Value
   public static class RealNumberVector {
 
+    static final RealNumberVector ZERO = new RealNumberVector(new RealNumber(0), new RealNumber(0));
+
     public static RealNumberVector random() {
       return new RealNumberVector(RealNumber.random(), RealNumber.random());
     }
@@ -42,6 +44,13 @@ public class TwoDimensionsRealNumberVectorSpace {
           this.get第一成分().add(v.get第一成分()),
           this.get第二成分().add(v.get第二成分())
       );
+    }
+
+    /**
+     * 和の逆元
+     */
+    public RealNumberVector inverse() {
+      return this.multiply(new RealNumber(-1));
     }
   }
 }

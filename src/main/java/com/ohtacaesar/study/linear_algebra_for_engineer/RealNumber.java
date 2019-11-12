@@ -33,7 +33,7 @@ public class RealNumber {
 
   public static RealNumber random() {
     Random random = new Random();
-    return new RealNumber(random.nextInt());
+    return new RealNumber(random.nextInt(1000));
   }
 
   private double value;
@@ -44,6 +44,10 @@ public class RealNumber {
 
   public RealNumber multiply(RealNumber n) {
     return new RealNumber(this.getValue() * n.getValue());
+  }
+
+  public RealNumber minus() {
+    return new RealNumber(-this.getValue());
   }
 
 }
