@@ -113,4 +113,16 @@ public class TwoDimensionsRealNumberVectorSpaceTest {
   }
 
 
+  /**
+   * 標準基底
+   */
+  @Test
+  public void standardBasis() {
+    RealNumber a = RealNumber.random();
+    RealNumber b = RealNumber.random();
+    RealNumberVector x = new RealNumberVector(a, b);
+
+    Assert.assertEquals(x, RealNumberVector.Ex.multiply(a).add(RealNumberVector.Ey.multiply(b)));
+  }
+
 }

@@ -17,6 +17,10 @@ public class TwoDimensionsRealNumberVectorSpace {
 
     static final RealNumberVector ZERO = new RealNumberVector(new RealNumber(0), new RealNumber(0));
 
+    static final RealNumberVector Ex = new RealNumberVector(new RealNumber(1), new RealNumber(0));
+
+    static final RealNumberVector Ey = new RealNumberVector(new RealNumber(0), new RealNumber(1));
+
     public static RealNumberVector random() {
       return new RealNumberVector(RealNumber.random(), RealNumber.random());
     }
