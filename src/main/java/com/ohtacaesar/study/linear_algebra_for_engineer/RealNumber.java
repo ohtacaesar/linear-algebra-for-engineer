@@ -1,6 +1,7 @@
 package com.ohtacaesar.study.linear_algebra_for_engineer;
 
 import java.util.Random;
+import lombok.AllArgsConstructor;
 import lombok.Value;
 
 /**
@@ -28,7 +29,7 @@ import lombok.Value;
  *
  *  - Real NumberなのでRで表現するらしい
  */
-@Value
+@Value(staticConstructor = "of")
 public class RealNumber {
 
   public static RealNumber random() {
