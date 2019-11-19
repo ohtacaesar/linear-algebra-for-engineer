@@ -1,26 +1,21 @@
 package com.ohtacaesar.study.linear_algebra_for_engineer.chapter1;
 
 import com.ohtacaesar.study.linear_algebra_for_engineer.RealNumber;
-import com.ohtacaesar.study.linear_algebra_for_engineer.chapter1.TwoDimensionsRealNumberVectorSpace.RealNumberVector;
 import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * https://en.wikipedia.org/wiki/Vector_space#Definition
  */
-public class TwoDimensionsRealNumberVectorSpaceTest {
+public class RealNumberVectorTest {
 
-  public static class RealNumberVectorTest {
-
-    @Test
-    public void testEquals() {
-      RealNumberVector rnv = new RealNumberVector(new RealNumber(1), new RealNumber(99));
-      Assert.assertEquals(rnv, rnv);
-      Assert.assertEquals(rnv, new RealNumberVector(new RealNumber(1), new RealNumber(99)));
-      Assert.assertNotEquals(rnv, new RealNumberVector(new RealNumber(1), new RealNumber(100)));
-    }
+  @Test
+  public void testEquals() {
+    RealNumberVector rnv = RealNumberVector.of(RealNumber.of(1), RealNumber.of(99));
+    Assert.assertEquals(rnv, rnv);
+    Assert.assertEquals(rnv, RealNumberVector.of(RealNumber.of(1), RealNumber.of(99)));
+    Assert.assertNotEquals(rnv, RealNumberVector.of(RealNumber.of(1), RealNumber.of(100)));
   }
-
 
   /**
    * 2. 任意のa, b, c ∈ R2について、(a + b) + c = a + (b + c)が成り立つ。
@@ -82,7 +77,7 @@ public class TwoDimensionsRealNumberVectorSpaceTest {
    */
   @Test
   public void identityElementOfScalarMultiplication() {
-    RealNumber one = new RealNumber(1);
+    RealNumber one = RealNumber.of(1);
     RealNumberVector v = RealNumberVector.random();
 
     Assert.assertEquals(v.multiply(one), v);
@@ -112,7 +107,6 @@ public class TwoDimensionsRealNumberVectorSpaceTest {
     Assert.assertEquals(v.multiply(a.add(b)), v.multiply(a).add(v.multiply(b)));
   }
 
-
   /**
    * 標準基底
    */
@@ -120,7 +114,7 @@ public class TwoDimensionsRealNumberVectorSpaceTest {
   public void standardBasis() {
     RealNumber a = RealNumber.random();
     RealNumber b = RealNumber.random();
-    RealNumberVector x = new RealNumberVector(a, b);
+    RealNumberVector x = RealNumberVector.of(a, b);
 
     Assert.assertEquals(x, RealNumberVector.Ex.multiply(a).add(RealNumberVector.Ey.multiply(b)));
   }
