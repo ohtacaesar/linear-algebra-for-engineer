@@ -108,15 +108,26 @@ public class RealNumberVectorTest {
   }
 
   /**
-   * 標準基底
+   * 線形結合(一時結合)
+   * x = a * e1 + b * e2
    */
   @Test
-  public void standardBasis() {
+  public void linearCombination() {
     RealNumber a = RealNumber.random();
     RealNumber b = RealNumber.random();
     RealNumberVector x = RealNumberVector.of(a, b);
 
     Assert.assertEquals(x, RealNumberVector.Ex.multiply(a).add(RealNumberVector.Ey.multiply(b)));
+  }
+
+  @Test
+  public void linearTransformation() {
+    RealNumberVector x = RealNumberVector.random();
+    // x軸方向への拡大
+    RealNumberVector x2 = x.linearTransform(RealNumberVector.of(2, 0), RealNumberVector.of(0, 1));
+
+    Assert.assertEquals(x.get第一成分().multiply(RealNumber.of(2)), x2.get第一成分());
+    Assert.assertEquals(x.get第二成分(), x2.get第二成分());
   }
 
 }
