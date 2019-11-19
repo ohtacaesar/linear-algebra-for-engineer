@@ -6,14 +6,18 @@ import lombok.Value;
 @Value(staticConstructor = "of")
 public class RealNumberVector {
 
-  static final RealNumberVector ZERO = new RealNumberVector(RealNumber.of(0), RealNumber.of(0));
+  static final RealNumberVector ZERO = RealNumberVector.of(RealNumber.of(0), RealNumber.of(0));
 
-  static final RealNumberVector Ex = new RealNumberVector(RealNumber.of(1), RealNumber.of(0));
+  static final RealNumberVector Ex = RealNumberVector.of(RealNumber.of(1), RealNumber.of(0));
 
-  static final RealNumberVector Ey = new RealNumberVector(RealNumber.of(0), RealNumber.of(1));
+  static final RealNumberVector Ey = RealNumberVector.of(RealNumber.of(0), RealNumber.of(1));
 
   public static RealNumberVector random() {
     return RealNumberVector.of(RealNumber.random(), RealNumber.random());
+  }
+
+  public static RealNumberVector of(double x, double y) {
+    return RealNumberVector.of(RealNumber.of(x), RealNumber.of(y));
   }
 
   // 英語でなんて言う?(x, y)?
@@ -25,7 +29,7 @@ public class RealNumberVector {
    */
   public RealNumberVector multiply(RealNumber n) {
 
-    return new RealNumberVector(
+    return RealNumberVector.of(
         this.get第一成分().multiply(n),
         this.get第二成分().multiply(n)
     );
@@ -35,7 +39,7 @@ public class RealNumberVector {
    * 加法
    */
   public RealNumberVector add(RealNumberVector v) {
-    return new RealNumberVector(
+    return RealNumberVector.of(
         this.get第一成分().add(v.get第一成分()),
         this.get第二成分().add(v.get第二成分())
     );
@@ -46,5 +50,14 @@ public class RealNumberVector {
    */
   public RealNumberVector inverse() {
     return this.multiply(RealNumber.of(-1));
+  }
+
+  /**
+   * @param e1 標準基底の変換先
+   * @param e2 標準基底の変換先
+   * @return
+   */
+  public RealNumberVector linearTransform(RealNumberVector e1, RealNumberVector e2) {
+    return e1.multiply(this.第一成分).add(e2.multiply(第二成分));
   }
 }
