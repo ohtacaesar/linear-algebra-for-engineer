@@ -1,7 +1,6 @@
 package com.ohtacaesar.study.linear_algebra_for_engineer;
 
 import java.util.Random;
-import lombok.AllArgsConstructor;
 import lombok.Value;
 
 /**
@@ -35,6 +34,14 @@ public class RealNumber {
   public static RealNumber random() {
     Random random = new Random();
     return new RealNumber(random.nextInt(1000));
+  }
+
+  public static RealNumber[] randomArray(int n) {
+    RealNumber[] array = new RealNumber[n];
+    for(int i = 0; i < n; i ++) {
+      array[i] = RealNumber.random();
+    }
+    return array;
   }
 
   private double value;
