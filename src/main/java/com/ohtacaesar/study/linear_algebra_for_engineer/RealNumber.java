@@ -38,10 +38,18 @@ public class RealNumber {
 
   public static RealNumber[] randomArray(int n) {
     RealNumber[] array = new RealNumber[n];
-    for(int i = 0; i < n; i ++) {
+    for (int i = 0; i < n; i++) {
       array[i] = RealNumber.random();
     }
     return array;
+  }
+
+  public static RealNumber[] arrayOf(double... array) {
+    RealNumber[] newArray = new RealNumber[array.length];
+    for (int i = 0; i < array.length; i++) {
+      newArray[i] = RealNumber.of(array[i]);
+    }
+    return newArray;
   }
 
   private double value;
