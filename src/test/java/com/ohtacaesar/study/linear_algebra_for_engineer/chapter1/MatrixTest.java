@@ -101,4 +101,63 @@ public class MatrixTest {
     Assert.assertEquals(a.m, c.m);
     Assert.assertEquals(b.n, c.n);
   }
+
+  @Test
+  public void scalarMultiplication() {
+    RealNumber k = RealNumber.random();
+    RealNumber l = RealNumber.random();
+    Matrix a = Matrix.random(4, 3);
+    Matrix b = Matrix.random(4, 3);
+    Assert.assertEquals(a.multiply(k.add(l)), a.multiply(k).add(a.multiply(l)));
+    Assert.assertEquals(a.multiply(k.multiply(l)), a.multiply(l).multiply(k));
+    Assert.assertEquals(a.add(b).multiply(k), a.multiply(k).add(b.multiply(k)));
+  }
+
+  @Test
+  public void addition() {
+    Matrix a = Matrix.random(3, 2);
+    Matrix b = Matrix.random(3, 2);
+    Matrix c = Matrix.random(3, 2);
+    Assert.assertEquals(a.add(b).add(c), b.add(c).add(a));
+    Assert.assertEquals(a.add(b), b.add(a));
+  }
+
+  @Test
+  public void multiplication() {
+    Matrix a = Matrix.random(4, 3);
+    Matrix b = Matrix.random(3, 2);
+    Matrix c = Matrix.random(2, 4);
+    Assert.assertEquals(a.multiply(b).multiply(c), a.multiply(b.multiply(c)));
+
+    a = Matrix.random(3, 4);
+    b = Matrix.random(4, 2);
+    c = Matrix.random(4, 2);
+    Assert.assertEquals(a.multiply(b.add(c)), a.multiply(b).add(a.multiply(c)));
+
+    a = Matrix.random(3, 4);
+    b = Matrix.random(3, 4);
+    c = Matrix.random(4, 2);
+    Assert.assertEquals(a.add(b).multiply(c), a.multiply(c).add(b.multiply(c)));
+
+    RealNumber k = RealNumber.random();
+    a = Matrix.random(2, 4);
+    b = Matrix.random(4, 3);
+    Matrix tmp = a.multiply(b).multiply(k);
+    Assert.assertEquals(tmp, a.multiply(k).multiply(b));
+    Assert.assertEquals(tmp, a.multiply(b.multiply(k)));
+  }
+
+  @Test
+  public void multiplyZero() {
+    Matrix a = Matrix.random(3, 2);
+    Matrix zero = Matrix.zero(2, 1);
+    Assert.assertEquals(a.multiply(zero), Matrix.zero(3, 1));
+  }
+
+  @Test
+  public void addZero() {
+    Matrix a = Matrix.random(3, 2);
+    Matrix zero = Matrix.zero(3, 2);
+    Assert.assertEquals(a.add(zero), a);
+  }
 }
