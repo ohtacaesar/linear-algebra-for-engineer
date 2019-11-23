@@ -16,6 +16,10 @@ public class Matrix {
     return new Matrix(m, n, RealNumber.randomArray(m * n));
   }
 
+  public static Matrix zero(int m, int n) {
+    return new Matrix(m, n, RealNumber.zeroArray(m * n));
+  }
+
   // 行
   public final int m;
   // 列

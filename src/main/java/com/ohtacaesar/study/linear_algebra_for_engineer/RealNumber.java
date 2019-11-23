@@ -52,6 +52,15 @@ public class RealNumber {
     return newArray;
   }
 
+  public static RealNumber[] zeroArray(int n ) {
+    RealNumber[] array = new RealNumber[n];
+    for(int i = 0; i < n; i++) {
+      array[i] = RealNumber.of(0);
+    }
+
+    return array;
+  }
+
   private double value;
 
   public RealNumber add(RealNumber n) {
