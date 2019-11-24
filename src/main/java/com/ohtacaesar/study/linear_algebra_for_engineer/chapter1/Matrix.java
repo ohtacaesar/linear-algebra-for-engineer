@@ -8,8 +8,8 @@ import lombok.Value;
 @Value
 public class Matrix {
 
-  public static Matrix of(int m, int n, RealNumber[] realNumberArray) {
-    return new Matrix(m, n, realNumberArray);
+  public static Matrix of(int m, int n, RealNumber[] realNumbers) {
+    return new Matrix(m, n, realNumbers);
   }
 
   public static Matrix random(int m, int n) {
@@ -18,6 +18,19 @@ public class Matrix {
 
   public static Matrix zero(int m, int n) {
     return new Matrix(m, n, RealNumber.zeroArray(m * n));
+  }
+
+  public static Matrix identityMatrixOf(int m) {
+    RealNumber zero = RealNumber.of(0);
+    RealNumber one = RealNumber.of(1);
+    RealNumber[] array = new RealNumber[m * m];
+    for (int i = 0; i < m; i++) {
+      for (int j = 0; j < m; j++) {
+        array[i * m + j] = i == j ? one : zero;
+      }
+    }
+
+    return Matrix.of(m, m, array);
   }
 
   // 行
@@ -95,6 +108,21 @@ public class Matrix {
     }
 
     return Matrix.of(this.m, matrix.n, newArray);
+  }
+
+  public Matrix inverse2by2() {
+    assert this.m == 2;
+    assert this.n == 2;
+    RealNumber a = this.item(1, 1);
+    RealNumber b = this.item(1, 2);
+    RealNumber c = this.item(2, 1);
+    RealNumber d = this.item(2, 2);
+    RealNumber determinant = a.multiply(d).subtract(b.multiply(c));
+    assert determinant.getValue() != 0;
+
+    return Matrix.of(2, 2, new RealNumber[]{d, b.minus(), c.minus(), a}).multiply(
+        RealNumber.of(1).divide(determinant)
+    );
   }
 
 }
