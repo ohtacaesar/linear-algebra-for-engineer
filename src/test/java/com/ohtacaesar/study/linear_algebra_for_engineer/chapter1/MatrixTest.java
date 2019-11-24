@@ -160,4 +160,39 @@ public class MatrixTest {
     Matrix zero = Matrix.zero(3, 2);
     Assert.assertEquals(a.add(zero), a);
   }
+
+  @Test
+  public void testIdentityMatrixOf() {
+    RealNumber zero = RealNumber.of(0);
+    RealNumber one = RealNumber.of(1);
+    int size = 3;
+    Matrix I = Matrix.identityMatrixOf(size);
+    for (int i = 1; i <= size; i++) {
+      for (int j = 1; j <= size; j++) {
+        Assert.assertEquals(i == j ? one : zero, I.item(i, j));
+      }
+    }
+
+    Matrix A = Matrix.random(3, 3);
+    Assert.assertEquals(A, A.multiply(I));
+    Assert.assertEquals(A, I.multiply(A));
+  }
+
+  @Test
+  public void test2by2InverseMatrix() {
+    Matrix I = Matrix.identityMatrixOf(2);
+    Matrix A = Matrix.of(2, 2, RealNumber.arrayOf(1, 2, 3, 4));
+    Matrix B = A.inverse2by2();
+    Assert.assertEquals(I, A.multiply(B));
+    Assert.assertEquals(I, B.multiply(A));
+  }
+
+  @Test
+  public void test() {
+    Matrix A = Matrix.of(2, 2, RealNumber.arrayOf(1, 2, 3, 4));
+    Matrix B = Matrix.of(2, 2, RealNumber.arrayOf(4, 3, 2, 1));
+
+    Assert.assertEquals(A.multiply(B).inverse2by2(), B.inverse2by2().multiply(A.inverse2by2()));
+    Assert.assertEquals(A.multiply(B).transpose(), B.transpose().multiply(A.transpose()));
+  }
 }
