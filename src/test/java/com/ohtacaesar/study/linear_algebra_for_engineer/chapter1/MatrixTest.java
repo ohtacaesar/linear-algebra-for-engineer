@@ -195,4 +195,19 @@ public class MatrixTest {
     Assert.assertEquals(A.multiply(B).inverse2by2(), B.inverse2by2().multiply(A.inverse2by2()));
     Assert.assertEquals(A.multiply(B).transpose(), B.transpose().multiply(A.transpose()));
   }
+
+  @Test
+  public void testSystemHasInfinityManySolutions() {
+
+  }
+
+  @Test
+  public void testSystemHasASingleUniqueSolution() {
+
+  }
+
+  @Test
+  public void testSystemHasNoSolution() {
+
+  }
 }
