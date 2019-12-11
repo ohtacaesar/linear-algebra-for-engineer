@@ -110,15 +110,48 @@ public class Matrix {
     return Matrix.of(this.m, matrix.n, newArray);
   }
 
-  public Matrix inverse2by2() {
+  /**
+   * 正方行列
+   */
+  public boolean isSquareMatrix() {
+    return this.m == this.n;
+  }
+
+  /**
+   * 行列式
+   * 正方行列に対して定義される量で、一次方程式の可読性を判定する指標として導入された
+   */
+  public RealNumber determinant() {
     assert this.m == 2;
     assert this.n == 2;
     RealNumber a = this.item(1, 1);
     RealNumber b = this.item(1, 2);
     RealNumber c = this.item(2, 1);
     RealNumber d = this.item(2, 2);
-    RealNumber determinant = a.multiply(d).subtract(b.multiply(c));
-    assert determinant.getValue() != 0;
+    return a.multiply(d).subtract(b.multiply(c));
+  }
+
+  /**
+   * 正則行列
+   * 逆行列が存在する行列
+   */
+  public boolean isRegularMatrix() {
+    return !this.determinant().equals(RealNumber.of(0));
+  }
+
+  /**
+   * 逆行列
+   */
+  public Matrix inverse() {
+    assert this.m == 2;
+    assert this.n == 2;
+    RealNumber determinant = this.determinant();
+    assert !determinant.equals(RealNumber.of(0));
+
+    RealNumber a = this.item(1, 1);
+    RealNumber b = this.item(1, 2);
+    RealNumber c = this.item(2, 1);
+    RealNumber d = this.item(2, 2);
 
     return Matrix.of(2, 2, new RealNumber[]{d, b.minus(), c.minus(), a}).multiply(
         RealNumber.of(1).divide(determinant)

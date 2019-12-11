@@ -182,7 +182,7 @@ public class MatrixTest {
   public void test2by2InverseMatrix() {
     Matrix I = Matrix.identityMatrixOf(2);
     Matrix A = Matrix.of(2, 2, RealNumber.arrayOf(1, 2, 3, 4));
-    Matrix B = A.inverse2by2();
+    Matrix B = A.inverse();
     Assert.assertEquals(I, A.multiply(B));
     Assert.assertEquals(I, B.multiply(A));
   }
@@ -192,7 +192,7 @@ public class MatrixTest {
     Matrix A = Matrix.of(2, 2, RealNumber.arrayOf(1, 2, 3, 4));
     Matrix B = Matrix.of(2, 2, RealNumber.arrayOf(4, 3, 2, 1));
 
-    Assert.assertEquals(A.multiply(B).inverse2by2(), B.inverse2by2().multiply(A.inverse2by2()));
+    Assert.assertEquals(A.multiply(B).inverse(), B.inverse().multiply(A.inverse()));
     Assert.assertEquals(A.multiply(B).transpose(), B.transpose().multiply(A.transpose()));
   }
 
@@ -203,7 +203,21 @@ public class MatrixTest {
 
   @Test
   public void testSystemHasASingleUniqueSolution() {
+    RealNumber a = RealNumber.of(1);
+    RealNumber b = RealNumber.of(2);
+    RealNumber c = RealNumber.of(3);
+    RealNumber d = RealNumber.of(4);
+    RealNumber p = RealNumber.of(5);
+    RealNumber q = RealNumber.of(6);
 
+    Matrix A = Matrix.of(2, 2, new RealNumber[]{
+        a, b, c, d
+    });
+
+    Matrix solution = A.inverse().multiply(Matrix.of(2, 1, new RealNumber[]{p, q}));
+    Assert.assertEquals(RealNumber.of(-4), solution.item(1, 1));
+    Assert.assertEquals(RealNumber.of(-4.5), solution.item(2, 1));
+    System.out.println(solution);
   }
 
   @Test
